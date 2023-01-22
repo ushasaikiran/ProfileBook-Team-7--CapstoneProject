@@ -1,0 +1,36 @@
+.form{
+
+    background-color: rgb(20, 23, 25);
+    border-radius: 5px;
+    width: 550px;
+    margin: 20px auto;
+    padding: 20px;
+
+}
+
+.form-body{
+    
+    background-color: rgb(20, 23, 25);
+    text-align: left;
+    padding: 20px 10px;
+
+}
+
+.form-body > *{
+
+    background-color: rgb(255, 255, 255);
+
+    padding: 5px;
+}
+
+
+
+.form__label{
+    background-color: rgb(40, 146, 13);
+
+    width: 40%;
+}
+
+.form_input{
+    width: 60%;
+}

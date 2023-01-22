@@ -1,0 +1,170 @@
+ create table admin_table (admin_id bigint not null, admin_mob_no bigint not null, admin_name varchar(255), admin_password varchar(255), email_id varchar(255), user_id bigint, primary key (admin_id)) 
+ create table comment (post_id bigint not null, comment varchar(255), user_name varchar(255), primary key (post_id)) 
+ create table hibernate_sequence (next_val bigint) 
+insert into hibernate_sequence values ( 1 )
+ create table reported_user (report_id bigint not null, report_from varchar(255), report_to varchar(255), primary key (report_id)) 
+ create table user_post (post_id bigint not null, post_description varchar(255), post_hashtag varchar(255), post_image_url varchar(255), post_name varchar(255), user_name varchar(255), primary key (post_id))\
+ create table user_table (user_id bigint not null, email_id varchar(255), msg_id bigint not null, user_mob_no bigint not null, user_name varchar(255), user_password varchar(255), primary key (user_id)) 
+ create table user_group (group_id bigint not null, admin_id bigint not null, group_name varchar(255), user_id bigint, primary key (group_id)) 
+ alter table admin_table add constraint FK79fsp0hhjh1r45wodaed2v1c3 foreign key (user_id) references user_table (user_id)
+ alter table user_group add constraint FKk55jeq981ja0pj6uwxjbuusvn foreign key (user_id) references user_table (user_id)
+
+
+
+
+mysql> use capstone7profilepage
+Database changed
+mysql> show tables;
++--------------------------------+
+| Tables_in_capstone7profilepage |
++--------------------------------+
+| admin_table                    |
+| comment                        |
+| hibernate_sequence             |
+| messages                       |
+| reported_user                  |
+| user_group                     |
+| user_post                      |
+| user_table                     |
++--------------------------------+
+8 rows in set (0.00 sec)
+
+mysql> desc admin_table;
++----------------+--------------+------+-----+---------+-------+
+| Field          | Type         | Null | Key | Default | Extra |
++----------------+--------------+------+-----+---------+-------+
+| admin_id       | bigint(20)   | NO   | PRI | NULL    |       |
+| admin_mob_no   | bigint(20)   | NO   |     | NULL    |       |
+| admin_name     | varchar(255) | YES  |     | NULL    |       |
+| admin_password | varchar(255) | YES  |     | NULL    |       |
+| email_id       | varchar(255) | YES  |     | NULL    |       |
++----------------+--------------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+mysql> desc comment;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| post_id   | bigint(20)   | NO   | PRI | NULL    |       |
+| comment   | varchar(255) | YES  |     | NULL    |       |
+| user_name | varchar(255) | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql> desc messages;
++-------------------+--------------+------+-----+---------+----------------+
+| Field             | Type         | Null | Key | Default | Extra          |
++-------------------+--------------+------+-----+---------+----------------+
+| msg_id            | bigint(20)   | NO   | PRI | NULL    | auto_increment |
+| date_and_time     | date         | YES  |     | NULL    |                |
+| msg_receiver_name | varchar(255) | YES  |     | NULL    |                |
+| msg_sender_name   | varchar(255) | YES  |     | NULL    |                |
+| msg_text          | varchar(255) | YES  |     | NULL    |                |
++-------------------+--------------+------+-----+---------+----------------+
+5 rows in set (0.01 sec)
+
+mysql> desc reported_user;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| report_id   | bigint(20)   | NO   | PRI | NULL    |       |
+| email_id    | varchar(255) | YES  |     | NULL    |       |
+| reason      | varchar(255) | YES  |     | NULL    |       |
+| user_mob_no | bigint(20)   | NO   |     | NULL    |       |
+| user_name   | varchar(255) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+
+mysql> desc user_group;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| group_id   | bigint(20)   | NO   | PRI | NULL    |       |
+| admin_id   | bigint(20)   | NO   |     | NULL    |       |
+| group_name | varchar(255) | YES  |     | NULL    |       |
+| user_id    | bigint(20)   | YES  | MUL | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> desc user_post;
++------------------+--------------+------+-----+---------+-------+
+| Field            | Type         | Null | Key | Default | Extra |
++------------------+--------------+------+-----+---------+-------+
+| post_id          | bigint(20)   | NO   | PRI | NULL    |       |
+| post_description | varchar(255) | YES  |     | NULL    |       |
+| post_hashtag     | varchar(255) | YES  |     | NULL    |       |
+| post_image_url   | varchar(255) | YES  |     | NULL    |       |
+| post_name        | varchar(255) | YES  |     | NULL    |       |
+| user_name        | varchar(255) | YES  |     | NULL    |       |
+| user_password    | varchar(255) | YES  |     | NULL    |       |
++------------------+--------------+------+-----+---------+-------+
+7 rows in set (0.02 sec)
+
+mysql> desc user_table;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| user_id       | bigint(20)   | NO   | PRI | NULL    |       |
+| email_id      | varchar(255) | YES  |     | NULL    |       |
+| msg_id        | bigint(20)   | NO   |     | NULL    |       |
+| user_mob_no   | bigint(20)   | NO   |     | NULL    |       |
+| user_name     | varchar(255) | YES  |     | NULL    |       |
+| user_password | varchar(255) | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+6 rows in set (0.02 sec)
+
+mysql> select * from admin_table;;
++----------+--------------+--------------+----------------+------------------------+
+| admin_id | admin_mob_no | admin_name   | admin_password | email_id               |
++----------+--------------+--------------+----------------+------------------------+
+|       27 |   9678900764 | Monika       | monika@123     | monika@gmail.com       |
+|       28 |   9876776544 | Yogeshri     | yogeshri@123   | yogeshri@gmail.com     |
+|       29 |   9087899900 | UshaSaiKiran | usha@123       | ushasaikiran@gmail.com |
+|       30 |   9877678786 | Bhargavi     | bhargavi@123   | bhargavi@gmail.com     |
+|       88 |   9678655455 | UshaSaiKiran | usk@123        | usk@gmail.com          |
+|       91 |   6304078996 | Tom          | tom@123        | tom@gmail.com          |
++----------+--------------+--------------+----------------+------------------------+
+6 rows in set (0.00 sec)
+
+ERROR:
+No query specified
+
+mysql> select * from user_table;
++---------+---------------------+--------+-------------+------------+---------------+
+| user_id | email_id            | msg_id | user_mob_no | user_name  | user_password |
++---------+---------------------+--------+-------------+------------+---------------+
+|       1 | Ram@gmail.com       |      0 |  9678756666 | RAM        | ram@456       |
+|       2 | monika@gmail.com    |      0 |  9087900766 | Monika     | monika@123    |
+|       6 | varun@123gmail.com  |      0 |  7896754567 | varun teja | varun@123     |
+|      22 | charan@gmail.com    |      0 |  9877677677 | CharanTeja | charan        |
+|      52 | sai@gmail.com       |      0 |  9878677877 | Sai        | sai@123       |
+|      80 | bala@gmail.com      |      0 |  6300238477 | Bala       | bala@123      |
+|      82 | uppala.38@gmail.com |      0 |  9676044255 | Vijaya     | uvk@123       |
+|      90 | ragava@gmail.com    |      0 |  8977899989 | Raghava    | rag@123       |
+|      93 | kiran@gmail.com     |      0 |  6789867875 | Kiran      | kiran@123     |
+|      94 | pavan@gmail.com     |      0 |  9767888965 | Pavan      | pavan@123     |
++---------+---------------------+--------+-------------+------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from user_post;
++---------+--------------------+--------------+-----------------------------------------------------------------------------------------------------------------------------------+------------------+-----------+---------------+
+| post_id | post_description   | post_hashtag | post_image_url
+                                             | post_name        | user_name | user_password |
++---------+--------------------+--------------+-----------------------------------------------------------------------------------------------------------------------------------+------------------+-----------+---------------+
+|      65 | Funny              | NULL         | https://www.gifcen.com/wp-content/uploads/2021/09/tom-and-jerry-gif-3.gif
+                                             | Tom And Jerry    | sai       | NULL          |
+|      81 | Hara Hara Mahadeva | NULL         | https://media.tenor.com/8xui5EE_K2QAAAAd/lord-shiva-good-morning.gif
+                                             | LORD SHIVA       | Bala      | NULL          |
+|      92 | Funny!!            | NULL         | https://media0.giphy.com/media/Q5u9Vt1Ig74cUa7u1k/200w.gif?cid=82a1493b9iqp6n76e55wo6z8qpl59akd16a8nb953mwi010a&rid=200w.gif&ct=g | Jerry and Nibble | Tom       | NULL          |
++---------+--------------------+--------------+-----------------------------------------------------------------------------------------------------------------------------------+------------------+-----------+---------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from reported_user;
++-----------+------------------+--------------+-------------+-----------+
+| report_id | email_id         | reason       | user_mob_no | user_name |
++-----------+------------------+--------------+-------------+-----------+
+|        86 | ramu@gmail.com   | Bad Messages |  9767896789 | RAMU      |
+|        87 | monika@gmail.com | Bad Post     |  9087900766 | Monika    |
++-----------+------------------+--------------+-------------+-----------+
+2 rows in set (0.00 sec)
